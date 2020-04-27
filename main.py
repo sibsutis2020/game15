@@ -35,6 +35,9 @@ f_top.pack()
 canv = Canvas(root, width = canv_width, height = canv_height)
 canv.pack()
 
+f_bottom = Frame()
+f_bottom.pack(side = BOTTOM, fill = X)
+
 #создание элементов
 def create_elem(el_num):
     el = elems[el_num]
@@ -66,10 +69,10 @@ def close():
 greeting = Label(f_top, text = "Hello, Player!", font = ("Ubuntu", 20))
 greeting.pack()
 
-start = Button(text = "Start", font = ("Ubuntu", 15), bg = "skyblue", command = start)
-start.pack()
+start = Button(f_bottom, text = "Start", font = ("Ubuntu", 13), bg = "skyblue", command = start)
+start.pack(side = LEFT)
 
-close = Button(text = "Close game", font = ("Ubuntu", 15), bg = "skyblue", command = close)
-close.pack()
+close = Button(f_bottom, text = "Close game", font = ("Ubuntu", 13), bg = "skyblue", command = close)
+close.pack(side = RIGHT)
 
 root.mainloop()
