@@ -66,4 +66,7 @@ greeting.pack()
 start = Button(text = "Start", font = ("Ubuntu", 15), bg = "skyblue", command = start)
 start.pack()
 
+close = Button(text = "Close game", font = ("Ubuntu", 15), bg = "skyblue")
+close.pack()
+
 root.mainloop()
