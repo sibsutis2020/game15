@@ -60,13 +60,16 @@ def change_elems(elem_num1, elem_num2):
     draw_elem(elem_num1)
     draw_elem(elem_num2)
 
+def close():
+    root.destroy()
+
 greeting = Label(f_top, text = "Hello, Player!", font = ("Ubuntu", 20))
 greeting.pack()
 
 start = Button(text = "Start", font = ("Ubuntu", 15), bg = "skyblue", command = start)
 start.pack()
 
-close = Button(text = "Close game", font = ("Ubuntu", 15), bg = "skyblue")
+close = Button(text = "Close game", font = ("Ubuntu", 15), bg = "skyblue", command = close)
 close.pack()
 
 root.mainloop()
