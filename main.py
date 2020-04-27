@@ -14,7 +14,7 @@ canv_width = x_count * cell_size
 canv_height = y_count * cell_size
 
 
-#функция с удалением приветствия
+#функция старта игры
 def start():
     global elems
     random.shuffle(elems)
