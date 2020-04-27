@@ -18,4 +18,9 @@ root.title("Пятнашки")
 canv = Canvas(root, width = canv_width, height = canv_height)
 canv.pack()
 
+for x_num in range(x_count):
+    for y_num in range(y_count):
+        canv.create_line(0, y_num * cell_size, canv_width, y_num * cell_size)
+        canv.create_line( x_num * cell_size, 0, x_num * cell_size, canv_height)
+
 root.mainloop()
