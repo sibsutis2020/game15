@@ -13,20 +13,21 @@ elems = ["e1", "e2", "e3","e4","e5","e6","e7","e8", "e9","e10","e11", "e12","e13
 canv_width = x_count * cell_size
 canv_height = y_count * cell_size
 
-
-#функция старта игры
-def start():
+def reshuffle():
     global elems
     random.shuffle(elems)
-
-    greeting.pack_forget()
-
     for el_num in range(len(elems)):
         create_elem(el_num)
 
+#функция старта игры
+def start():
+    reshuffle()
+
+    greeting.pack_forget()
+
     start.pack_forget()
 
-    restart = Button(f_bottom, text = "Restart", font = ("Ubuntu", 13), bg = "skyblue", width = 10)
+    restart = Button(f_bottom, text = "Restart", font = ("Ubuntu", 13), bg = "skyblue", width = 10, command = reshuffle)
     restart.pack(side = LEFT)
 
 root = Tk()
