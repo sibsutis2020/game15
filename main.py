@@ -24,6 +24,8 @@ def start():
     for el_num in range(len(elems)):
         create_elem(el_num)
 
+    start.pack_forget()
+
 root = Tk()
 root.title("Пятнашки")
 
