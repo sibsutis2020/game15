@@ -32,7 +32,7 @@ canv.pack()
 #создание элементов
 def create_elem(el_num):
     el = elems[el_num]
-    row_num = el_num / 4
+    row_num = el_num // 4
     col_num = el_num % 4
     x_left = col_num * cell_size
     y_top = row_num * cell_size
