@@ -16,6 +16,9 @@ canv_height = y_count * cell_size
 
 #функция с удалением приветствия
 def start():
+    global elems
+    random.shuffle(elems)
+
     f_top.pack_forget()
 
     for el_num in range(len(elems)):
