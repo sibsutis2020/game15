@@ -17,9 +17,6 @@ canv_height = y_count * cell_size
 def start():
     f_top.pack_forget()
 
-    for el_num in range(len(elems)):
-        create_elem(el_num)
-
 root = Tk()
 root.title("Пятнашки")
 
@@ -28,18 +25,6 @@ f_top.pack()
 
 canv = Canvas(root, width = canv_width, height = canv_height)
 canv.pack()
-
-#создание элементов
-def create_elem(el_num):
-    el = elems[el_num]
-    row_num = el_num / 4
-    col_num = el_num % 4
-    x_left = col_num * cell_size
-    y_top = row_num * cell_size
-    canv.create_rectangle(x_left + 1, y_top + 1, x_left + cell_size - 2,
-                          y_top + cell_size - 2, fill = "skyblue", outline = "#050",
-                          width = 2, tag = el)
-    canv.create_text(x_left + 30, y_top + 30, text = el[1:], font = ("Arial", 20), tag = "t" + el)
 
 #прорисовка клеток
 for x_num in range(x_count):
