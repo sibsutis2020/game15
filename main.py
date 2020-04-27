@@ -12,7 +12,7 @@ elems = ["e1", "e2", "e2","e3","e4","e5","e6","e7", "e8","e8","e9","e10","e11", 
 canv_width = x_count * cell_size
 canv_height = y_count * cell_size
 
-#функция с удалением приветствия 
+#функция с удалением приветствия
 def start():
     f_top.pack_forget()
 
@@ -34,7 +34,7 @@ for x_num in range(x_count):
 greeting = Label(f_top, text = "Hello, Player!", font = ("Ubuntu", 20))
 greeting.pack()
 
-start = Button(text = "Start", font = ("Ubuntu", 15), command = start)
+start = Button(text = "Start", font = ("Ubuntu", 15), bg = "skyblue", command = start)
 start.pack()
 
 root.mainloop()
