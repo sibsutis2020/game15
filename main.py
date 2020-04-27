@@ -1,4 +1,5 @@
 from tkinter import *
+import random
 
 #параметры поля
 cell_size = 60
@@ -12,13 +13,23 @@ elems = ["e1", "e2", "e3","e4","e5","e6","e7","e8", "e9","e10","e11", "e12","e13
 canv_width = x_count * cell_size
 canv_height = y_count * cell_size
 
-
-#функция с удалением приветствия
-def start():
-    f_top.pack_forget()
-
+#перемешивание элементов 
+def reshuffle():
+    global elems
+    random.shuffle(elems)
     for el_num in range(len(elems)):
         create_elem(el_num)
+
+#функция старта игры
+def start():
+    reshuffle()
+
+    greeting.pack_forget()
+
+    start.pack_forget()
+
+    restart = Button(f_bottom, text = "Restart", font = ("Ubuntu", 13), bg = "skyblue", width = 10, command = reshuffle)
+    restart.pack(side = LEFT)
 
 root = Tk()
 root.title("Пятнашки")
@@ -28,6 +39,9 @@ f_top.pack()
 
 canv = Canvas(root, width = canv_width, height = canv_height)
 canv.pack()
+
+f_bottom = Frame()
+f_bottom.pack(side = BOTTOM, fill = X)
 
 #создание элементов
 def create_elem(el_num):
@@ -47,17 +61,23 @@ for x_num in range(x_count):
     for y_num in range(y_count):
         canv.create_line(0, y_num * cell_size, canv_width, y_num * cell_size)
         canv.create_line( x_num * cell_size, 0, x_num * cell_size, canv_height)
-        
+
 #поменять местами 2 элемента
 def change_elems(elem_num1, elem_num2):
     elems[elem_num1], elems[elem_num2] = elems[elem_num2], elems[elem_num1]
     draw_elem(elem_num1)
     draw_elem(elem_num2)
 
+def close():
+    root.destroy()
+
 greeting = Label(f_top, text = "Hello, Player!", font = ("Ubuntu", 20))
 greeting.pack()
 
-start = Button(text = "Start", font = ("Ubuntu", 15), bg = "skyblue", command = start)
-start.pack()
+start = Button(f_bottom, text = "Start", font = ("Ubuntu", 13), bg = "skyblue", width = 10, command = start)
+start.pack(side = LEFT)
+
+close = Button(f_bottom, text = "Close game", font = ("Ubuntu", 13), bg = "skyblue", command = close)
+close.pack(side = RIGHT)
 
 root.mainloop()
