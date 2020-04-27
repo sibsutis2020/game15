@@ -13,7 +13,7 @@ elems = ["e1", "e2", "e3","e4","e5","e6","e7","e8", "e9","e10","e11", "e12","e13
 canv_width = x_count * cell_size
 canv_height = y_count * cell_size
 
-#перемешивание элементов 
+#перемешивание элементов
 def reshuffle():
     global elems
     random.shuffle(elems)
@@ -55,6 +55,16 @@ def create_elem(el_num):
                           width = 2, tag = el)
     canv.create_text(x_left + 30, y_top + 30, text = el[1:], font = ("Arial", 20), tag = "t" + el)
 
+#отрисовка элементов
+def draw_elem(el_num):
+    el = elems[el_num]
+    row_num = el_num // 4
+    col_num = el_num % 4
+    x_left = col_num * cell_size
+    y_top = row_num * cell_size
+    canv.coords(el, x_left + 1, y_top + 1 , x_left + cell_size - 2,
+                y_top + cell_size - 2)
+    canv.coords("t"+el, x_left + 30, y_top + 30 )
 
 #прорисовка клеток
 for x_num in range(x_count):
