@@ -19,7 +19,7 @@ def start():
     global elems
     random.shuffle(elems)
 
-    f_top.pack_forget()
+    greeting.pack_forget()
 
     for el_num in range(len(elems)):
         create_elem(el_num)
@@ -70,9 +70,9 @@ greeting = Label(f_top, text = "Hello, Player!", font = ("Ubuntu", 20))
 greeting.pack()
 
 start = Button(f_bottom, text = "Start", font = ("Ubuntu", 13), bg = "skyblue", command = start)
-start.pack(side = LEFT)
+start.pack()
 
 close = Button(f_bottom, text = "Close game", font = ("Ubuntu", 13), bg = "skyblue", command = close)
-close.pack(side = RIGHT)
+close.pack()
 
 root.mainloop()
