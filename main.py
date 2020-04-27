@@ -26,6 +26,9 @@ def start():
 
     start.pack_forget()
 
+    restart = Button(f_bottom, text = "Restart", font = ("Ubuntu", 13), bg = "skyblue", width = 10)
+    restart.pack(side = LEFT)
+
 root = Tk()
 root.title("Пятнашки")
 
@@ -69,10 +72,10 @@ def close():
 greeting = Label(f_top, text = "Hello, Player!", font = ("Ubuntu", 20))
 greeting.pack()
 
-start = Button(f_bottom, text = "Start", font = ("Ubuntu", 13), bg = "skyblue", command = start)
-start.pack()
+start = Button(f_bottom, text = "Start", font = ("Ubuntu", 13), bg = "skyblue", width = 10, command = start)
+start.pack(side = LEFT)
 
 close = Button(f_bottom, text = "Close game", font = ("Ubuntu", 13), bg = "skyblue", command = close)
-close.pack()
+close.pack(side = RIGHT)
 
 root.mainloop()
