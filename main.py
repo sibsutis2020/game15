@@ -1,4 +1,5 @@
 from tkinter import *
+import random
 
 #параметры поля
 cell_size = 60
@@ -47,7 +48,7 @@ for x_num in range(x_count):
     for y_num in range(y_count):
         canv.create_line(0, y_num * cell_size, canv_width, y_num * cell_size)
         canv.create_line( x_num * cell_size, 0, x_num * cell_size, canv_height)
-        
+
 #поменять местами 2 элемента
 def change_elems(elem_num1, elem_num2):
     elems[elem_num1], elems[elem_num2] = elems[elem_num2], elems[elem_num1]
