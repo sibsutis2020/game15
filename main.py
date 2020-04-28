@@ -75,9 +75,11 @@ def draw_elem(el_num):
     col_num = el_num % 4
     x_left = col_num * cell_size
     y_top = row_num * cell_size
+    canv.itemconfig(el, fill = "skyblue", outline = "#050",
+    width = 2 )
     canv.coords(el, x_left + 1, y_top + 1 , x_left + cell_size - 2,
                 y_top + cell_size - 2)
-    canv.coords("t"+el, x_left + 30, y_top + 30 )
+    canv.coords("t" + el, x_left + 30, y_top + 30 )
 
 #прорисовка клеток
 for x_num in range(x_count):
@@ -86,16 +88,16 @@ for x_num in range(x_count):
         canv.create_line( x_num * cell_size, 0, x_num * cell_size, canv_height)
 
 #поменять местами 2 элемента
-def change_elems(elem_num1, elem_num2):
-    elems[elem_num1], elems[elem_num2] = elems[elem_num2], elems[elem_num1]
-    draw_elem(elem_num1)
-    draw_elem(elem_num2)
+def change_elems(el_num1, el_num2):
+    elems[el_num1], elems[el_num2] = elems[el_num2], elems[el_num1]
+    create_elem(el_num1)
+    create_elem(el_num2)
 
 #проверика на завершение игры
 def test_win( ):
-    for elem_num in range(15):
-        el = elems[elem_num]
-        if elem_num + 1 != int(el[1:]):
+    for el_num in range(15):
+        el = elems[el_num]
+        if el_num + 1 != int(el[1:]):
             return 0
     return 1
 
@@ -121,6 +123,33 @@ def neighbor_cell(el_num):
 
 def close():
     root.destroy()
+
+def test_elems(event):
+    global game_status
+    if game_status:
+        return
+    #номер элемента
+    col_num = event.x // cell_size
+    row_num = event.y // cell_size
+    el_num = col_num + row_num * 4
+
+    el = elems[el_num]
+    #щелчок по пустому полю
+    if el == "e0":
+        return
+
+    #ячейки-соседи
+    near_cells = neighbor_cell(el_num)
+
+    #проверить ячейки-соседи на 0
+    for tmp_num in near_cells:
+        if elems[tmp_num] == "e0":
+            change_elems(el_num, tmp_num)
+            game_status = test_win()
+    return
+
+#привязка к событиям мыши
+canv.bind("<Button-1>", test_elems)
 
 greeting = Label(f_top, text = "Hello, Player!", font = ("Ubuntu", 20))
 greeting.pack()
