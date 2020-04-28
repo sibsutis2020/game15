@@ -1,6 +1,8 @@
 from tkinter import *
 import random
 
+temp = 0
+
 #параметры поля
 cell_size = 60
 x_count = 4
@@ -44,6 +46,9 @@ def start():
 
     restart = Button(f_bottom, text = "Restart", font = ("Ubuntu", 13), bg = "skyblue", width = 10, command = reshuffle)
     restart.pack(side = LEFT)
+
+    counter = Label(f_top, text = temp)
+    counter.pack()
 
 root = Tk()
 root.title("Пятнашки")
@@ -146,6 +151,13 @@ def test_elems(event):
             change_elems(el_num, tmp_num)
             game_status = test_win()
     return
+
+def count():
+    global temp
+
+    if :
+        temp += 1
+
 
 #привязка к событиям мыши
 canv.bind("<Button-1>", test_elems)
