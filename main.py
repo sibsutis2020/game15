@@ -25,7 +25,17 @@ def reshuffle():
 
 #функция старта игры
 def start():
-    reshuffle()
+    global game_status
+
+    if game_status == -1 :  #начать игру в первый раз
+        for el_num in range(len(elems)):
+            create_elem(el_num)
+        reshuffle()
+    elif game_status == 1:  #начать игру заново
+        for el_num in range(len(elems)):
+            draw_elem(el_num)
+        reshuffle()
+    game_status = 0
 
     greeting.pack_forget()
 
@@ -80,6 +90,14 @@ def change_elems(elem_num1, elem_num2):
     elems[elem_num1], elems[elem_num2] = elems[elem_num2], elems[elem_num1]
     draw_elem(elem_num1)
     draw_elem(elem_num2)
+
+#проверика на завершение игры
+def test_win( ):
+    for elem_num in range(15):
+        el = elems[elem_num]
+        if elem_num + 1 != int(el[1:]):
+            return 0
+    return 1
 
 def close():
     root.destroy()
