@@ -25,7 +25,17 @@ def reshuffle():
 
 #функция старта игры
 def start():
-    reshuffle()
+    global game_status
+
+    if game_status == -1 :  #начать игру в первый раз
+        for el_num in range(len(elems)):
+            create_elem(el_num)
+        reshuffle()
+    elif game_status == 1:  #начать игру заново
+        for el_num in range(len(elems)):
+            draw_elem(el_num)
+        reshuffle()
+    game_status = 0
 
     greeting.pack_forget()
 
