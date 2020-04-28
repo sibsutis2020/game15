@@ -6,6 +6,9 @@ cell_size = 60
 x_count = 4
 y_count = 4
 
+#статус игры
+game_status = -1
+
 #массив игровых элементов
 elems = ["e1", "e2", "e3","e4","e5","e6","e7","e8", "e9","e10","e11", "e12","e13","e14","e15","e0"]
 
@@ -13,7 +16,7 @@ elems = ["e1", "e2", "e3","e4","e5","e6","e7","e8", "e9","e10","e11", "e12","e13
 canv_width = x_count * cell_size
 canv_height = y_count * cell_size
 
-#перемешивание элементов 
+#перемешивание элементов
 def reshuffle():
     global elems
     random.shuffle(elems)
@@ -22,7 +25,17 @@ def reshuffle():
 
 #функция старта игры
 def start():
-    reshuffle()
+    global game_status
+
+    if game_status == -1 :  #начать игру в первый раз
+        for el_num in range(len(elems)):
+            create_elem(el_num)
+        reshuffle()
+    elif game_status == 1:  #начать игру заново
+        for el_num in range(len(elems)):
+            draw_elem(el_num)
+        reshuffle()
+    game_status = 0
 
     greeting.pack_forget()
 
@@ -55,6 +68,16 @@ def create_elem(el_num):
                           width = 2, tag = el)
     canv.create_text(x_left + 30, y_top + 30, text = el[1:], font = ("Arial", 20), tag = "t" + el)
 
+#отрисовка элементов
+def draw_elem(el_num):
+    el = elems[el_num]
+    row_num = el_num // 4
+    col_num = el_num % 4
+    x_left = col_num * cell_size
+    y_top = row_num * cell_size
+    canv.coords(el, x_left + 1, y_top + 1 , x_left + cell_size - 2,
+                y_top + cell_size - 2)
+    canv.coords("t"+el, x_left + 30, y_top + 30 )
 
 #прорисовка клеток
 for x_num in range(x_count):
@@ -67,6 +90,14 @@ def change_elems(elem_num1, elem_num2):
     elems[elem_num1], elems[elem_num2] = elems[elem_num2], elems[elem_num1]
     draw_elem(elem_num1)
     draw_elem(elem_num2)
+
+#проверика на завершение игры
+def test_win( ):
+    for elem_num in range(15):
+        el = elems[elem_num]
+        if elem_num + 1 != int(el[1:]):
+            return 0
+    return 1
 
 def close():
     root.destroy()
