@@ -1,5 +1,6 @@
 from tkinter import *
 import random
+from datetime import datetime
 
 #параметры поля
 cell_size = 60
@@ -24,6 +25,14 @@ def reshuffle():
     for el_num in range(len(elems)):
         draw_elem(el_num)
 
+temp = 0
+after_id = ''
+def tick():
+  global temp, after_id
+  after_id = root.after(1000, tick)
+  label1.configure(text=str(temp))
+  temp += 1
+
 #функция старта игры
 def start():
     global game_status, elems
@@ -44,6 +53,8 @@ def start():
 
     restart = Button(f_bottom, text = "Restart", font = ("Ubuntu", 13), bg = "skyblue", width = 10, command = reshuffle)
     restart.pack(side = LEFT)
+
+    tick()
 
 root = Tk()
 root.title("Пятнашки")
@@ -158,5 +169,8 @@ start.pack(side = LEFT)
 
 close = Button(f_bottom, text = "Close game", font = ("Ubuntu", 13), bg = "skyblue", command = close)
 close.pack(side = RIGHT)
+
+label1 = Label(root, width=3, font=("Ubuntu", 30), text="00:00")
+label1.pack(side=TOP)
 
 root.mainloop()
