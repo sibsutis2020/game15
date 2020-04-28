@@ -81,6 +81,14 @@ def change_elems(elem_num1, elem_num2):
     draw_elem(elem_num1)
     draw_elem(elem_num2)
 
+#проверика на завершение игры
+def test_win( ):
+    for elem_num in range(15):
+        el = elems[elem_num]
+        if elem_num + 1 != int(el[1:]):
+            return 0
+    return 1
+
 def close():
     root.destroy()
 
