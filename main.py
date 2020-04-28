@@ -18,23 +18,24 @@ canv_height = y_count * cell_size
 
 #перемешивание элементов
 def reshuffle():
-    global elems
+    global elems, game_status
+    game_status = 0
     random.shuffle(elems)
     for el_num in range(len(elems)):
-        create_elem(el_num)
+        draw_elem(el_num)
 
 #функция старта игры
 def start():
-    global game_status
+    global game_status, elems
 
     if game_status == -1 :  #начать игру в первый раз
+        random.shuffle(elems)
         for el_num in range(len(elems)):
             create_elem(el_num)
-        reshuffle()
     elif game_status == 1:  #начать игру заново
+        random.shuffle(elems)
         for el_num in range(len(elems)):
             draw_elem(el_num)
-        reshuffle()
     game_status = 0
 
     greeting.pack_forget()
@@ -75,8 +76,6 @@ def draw_elem(el_num):
     col_num = el_num % 4
     x_left = col_num * cell_size
     y_top = row_num * cell_size
-    canv.itemconfig(el, fill = "skyblue", outline = "#050",
-    width = 2 )
     canv.coords(el, x_left + 1, y_top + 1 , x_left + cell_size - 2,
                 y_top + cell_size - 2)
     canv.coords("t" + el, x_left + 30, y_top + 30 )
@@ -90,8 +89,8 @@ for x_num in range(x_count):
 #поменять местами 2 элемента
 def change_elems(el_num1, el_num2):
     elems[el_num1], elems[el_num2] = elems[el_num2], elems[el_num1]
-    create_elem(el_num1)
-    create_elem(el_num2)
+    draw_elem(el_num1)
+    draw_elem(el_num2)
 
 #проверика на завершение игры
 def test_win( ):
