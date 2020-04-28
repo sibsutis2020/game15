@@ -122,6 +122,33 @@ def neighbor_cell(el_num):
 def close():
     root.destroy()
 
+def test_elems(event):
+    global game_status
+    if game_status:
+        return
+    #номер элемента
+    col_num = event.x // cell_size
+    row_num = event.y // cell_size
+    elem_num = col_num + row_num * 4
+
+    el = elems[elem_num]
+    #щелчок по пустому полю
+    if el == "e0":
+        return
+
+    #ячейки-соседи
+    near_cells = neighbor_cell(elem_num)
+
+    #проверить ячейки-соседи на 0
+    for tmp_num in near_cells:
+        if elems[tmp_num] == "e0":
+            change_elems( elem_num, tmp_num )
+            game_status = test_win()
+    return			
+
+#привязка к событиям мыши
+canv.bind("<Button-1>", test_elems)
+
 greeting = Label(f_top, text = "Hello, Player!", font = ("Ubuntu", 20))
 greeting.pack()
 
