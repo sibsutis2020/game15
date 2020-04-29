@@ -17,13 +17,6 @@ elems = ["e1", "e2", "e3","e4","e5","e6","e7","e8", "e9","e10","e11", "e12","e13
 canv_width = x_count * cell_size
 canv_height = y_count * cell_size
 
-def timeFunc():
-    global time
-    time = Label(root, width=5, font=("Ubuntu", 30), text="00:00")
-    f_temp = datetime.fromtimestamp(temp).strftime("%M:%S")
-    time.pack(side=TOP)
-
-    tick()
 
 #перемешивание элементов | рестарт
 def reshuffle():
@@ -40,7 +33,8 @@ after_id = ''
 def tick():
     global temp, after_id
     after_id = root.after(1000, tick)
-    time.configure(text=str(temp))
+    f_temp = datetime.fromtimestamp(temp).strftime("%M:%S")
+    time.configure(text=str(f_temp))
     temp += 1
 
 #функция старта игры
@@ -64,7 +58,7 @@ def start():
     restart = Button(f_bottom, text = "Restart", font = ("Ubuntu", 13), bg = "skyblue", width = 10, command = reshuffle, )
     restart.pack(side = LEFT)
 
-    timeFunc()
+    tick()
 
 root = Tk()
 root.title("Пятнашки")
@@ -170,6 +164,9 @@ def test_elems(event):
 
 #привязка к событиям мыши
 canv.bind("<Button-1>", test_elems)
+
+time = Label(root, width=5, font=("Ubuntu", 30), text="00:00")
+time.grid(row = 0, column = 0)
 
 greeting = Label(f_top, text = "Hello, Player!", font = ("Ubuntu", 20))
 greeting.pack()
