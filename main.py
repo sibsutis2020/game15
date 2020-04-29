@@ -17,21 +17,31 @@ elems = ["e1", "e2", "e3","e4","e5","e6","e7","e8", "e9","e10","e11", "e12","e13
 canv_width = x_count * cell_size
 canv_height = y_count * cell_size
 
-#перемешивание элементов
+def timeFunc():
+    global time
+    time = Label(root, width=5, font=("Ubuntu", 30), text="00:00")
+    f_temp = datetime.fromtimestamp(temp).strftime("%M:%S")
+    time.pack(side=TOP)
+
+    tick()
+
+#перемешивание элементов | рестарт
 def reshuffle():
-    global elems, game_status
+
+    global elems, game_status, temp
     game_status = 0
     random.shuffle(elems)
     for el_num in range(len(elems)):
         draw_elem(el_num)
+    temp = 0
 
 temp = 0
 after_id = ''
 def tick():
-  global temp, after_id
-  after_id = root.after(1000, tick)
-  label1.configure(text=str(temp))
-  temp += 1
+    global temp, after_id
+    after_id = root.after(1000, tick)
+    time.configure(text=str(temp))
+    temp += 1
 
 #функция старта игры
 def start():
@@ -51,10 +61,10 @@ def start():
 
     start.pack_forget()
 
-    restart = Button(f_bottom, text = "Restart", font = ("Ubuntu", 13), bg = "skyblue", width = 10, command = reshuffle)
+    restart = Button(f_bottom, text = "Restart", font = ("Ubuntu", 13), bg = "skyblue", width = 10, command = reshuffle, )
     restart.pack(side = LEFT)
 
-    tick()
+    timeFunc()
 
 root = Tk()
 root.title("Пятнашки")
@@ -169,8 +179,5 @@ start.pack(side = LEFT)
 
 close = Button(f_bottom, text = "Close game", font = ("Ubuntu", 13), bg = "skyblue", command = close)
 close.pack(side = RIGHT)
-
-label1 = Label(root, width=3, font=("Ubuntu", 30), text="00:00")
-label1.pack(side=TOP)
 
 root.mainloop()
