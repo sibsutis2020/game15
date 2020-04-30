@@ -1,5 +1,6 @@
 from tkinter import *
 import random
+from datetime import datetime
 
 #параметры поля
 cell_size = 60
@@ -16,17 +17,32 @@ elems = ["e1", "e2", "e3","e4","e5","e6","e7","e8", "e9","e10","e11", "e12","e13
 canv_width = x_count * cell_size
 canv_height = y_count * cell_size
 
-#перемешивание элементов
+
+#перемешивание элементов | рестарт
 def reshuffle():
-    global elems, game_status
+    global elems, game_status, temp
     game_status = 0
     random.shuffle(elems)
     for el_num in range(len(elems)):
         draw_elem(el_num)
+    temp = 0
+
+#секундомер
+temp = 0
+after_id = ''
+def tick():
+    global temp, after_id
+    after_id = root.after(1000, tick)
+    f_temp = datetime.fromtimestamp(temp).strftime("%M:%S")
+    time.configure(text=str(f_temp))
+    temp += 1
 
 #функция старта игры
 def start():
-    global game_status, elems
+    global game_status, elems, time
+
+    time = Label(root, width=5, font=("Ubuntu", 15), text="00:00")
+    time.pack()
 
     if game_status == -1 :  #начать игру в первый раз
         random.shuffle(elems)
@@ -42,8 +58,10 @@ def start():
 
     start.pack_forget()
 
-    restart = Button(f_bottom, text = "Restart", font = ("Ubuntu", 13), bg = "skyblue", width = 10, command = reshuffle)
+    restart = Button(f_bottom, text = "Restart", font = ("Ubuntu", 13), bg = "skyblue", width = 10, command = reshuffle, )
     restart.pack(side = LEFT)
+
+    tick()
 
 root = Tk()
 root.title("Пятнашки")
@@ -123,6 +141,7 @@ def neighbor_cell(el_num):
 def close():
     root.destroy()
 
+#сдвиг элементов
 def test_elems(event):
     global game_status
     if game_status:
