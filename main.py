@@ -20,7 +20,6 @@ canv_height = y_count * cell_size
 
 #перемешивание элементов | рестарт
 def reshuffle():
-
     global elems, game_status, temp
     game_status = 0
     random.shuffle(elems)
@@ -28,6 +27,7 @@ def reshuffle():
         draw_elem(el_num)
     temp = 0
 
+#секундомер
 temp = 0
 after_id = ''
 def tick():
@@ -39,7 +39,10 @@ def tick():
 
 #функция старта игры
 def start():
-    global game_status, elems
+    global game_status, elems, time
+
+    time = Label(root, width=5, font=("Ubuntu", 15), text="00:00")
+    time.pack()
 
     if game_status == -1 :  #начать игру в первый раз
         random.shuffle(elems)
@@ -138,6 +141,7 @@ def neighbor_cell(el_num):
 def close():
     root.destroy()
 
+#сдвиг элементов
 def test_elems(event):
     global game_status
     if game_status:
@@ -164,9 +168,6 @@ def test_elems(event):
 
 #привязка к событиям мыши
 canv.bind("<Button-1>", test_elems)
-
-time = Label(root, width=5, font=("Ubuntu", 30), text="00:00")
-time.grid(row = 0, column = 0)
 
 greeting = Label(f_top, text = "Hello, Player!", font = ("Ubuntu", 20))
 greeting.pack()
