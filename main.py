@@ -1,6 +1,7 @@
 from tkinter import *
 import random
 from datetime import datetime
+from tkinter.messagebox import *
 
 #параметры поля
 cell_size = 60
@@ -16,6 +17,9 @@ elems = ["e1", "e2", "e3","e4","e5","e6","e7","e8", "e9","e10","e11", "e12","e13
 #формирование канавы
 canv_width = x_count * cell_size
 canv_height = y_count * cell_size
+
+def win_window():
+    w_w = askyesno("", "ВЫ ПОБЕДИЛИ!!!\nХотите начать заново?")
 
 #перемешивание элементов | рестарт
 def reshuffle():
