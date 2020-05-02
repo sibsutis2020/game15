@@ -17,7 +17,6 @@ elems = ["e1", "e2", "e3","e4","e5","e6","e7","e8", "e9","e10","e11", "e12","e13
 canv_width = x_count * cell_size
 canv_height = y_count * cell_size
 
-
 #перемешивание элементов | рестарт
 def reshuffle():
     global elems, game_status, temp
@@ -36,6 +35,9 @@ def tick():
     f_temp = datetime.fromtimestamp(temp).strftime("%M:%S")
     time.configure(text=str(f_temp))
     temp += 1
+
+    if game_status == 1:
+        root.after_cancel(after_id)
 
 #функция старта игры
 def start():
