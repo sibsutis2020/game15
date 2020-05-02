@@ -65,6 +65,7 @@ def start():
 
 root = Tk()
 root.title("Пятнашки")
+root.resizable(False, False)
 
 f_top = Frame()
 f_top.pack(fill = X)
