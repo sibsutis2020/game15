@@ -47,7 +47,7 @@ def start():
     restart = Button(f_bottom, text = "Restart", font = ("Ubuntu", 13), bg = "skyblue", width = 10, command = reshuffle)
     restart.pack(side = LEFT)
 
-    counter = Label(f_top, text = temp)
+    counter = Label(f_top, text = temp, font = ("Ubuntu", 20))
     counter.pack()
 
 root = Tk()
@@ -154,10 +154,6 @@ def test_elems(event):
 
 def count():
     global temp
-
-    if :
-        temp += 1
-
 
 #привязка к событиям мыши
 canv.bind("<Button-1>", test_elems)
