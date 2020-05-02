@@ -41,8 +41,8 @@ def tick():
 def start():
     global game_status, elems, time
 
-    time = Label(root, width=5, font=("Ubuntu", 15), text="00:00")
-    time.pack()
+    time = Label(f_top, width=5, font=("Ubuntu", 15), text="00:00")
+    time.pack(side = LEFT)
 
     if game_status == -1 :  #начать игру в первый раз
         random.shuffle(elems)
@@ -67,7 +67,7 @@ root = Tk()
 root.title("Пятнашки")
 
 f_top = Frame()
-f_top.pack()
+f_top.pack(fill = X)
 
 canv = Canvas(root, width = canv_width, height = canv_height)
 canv.pack()
