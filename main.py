@@ -33,7 +33,11 @@ def reshuffle():
     random.shuffle(elems)
     for el_num in range(len(elems)):
         draw_elem(el_num)
+    root.after_cancel(after_id)
     temp = 0
+    time.config(text = "00:00")
+
+    tick()
 
 #секундомер
 temp = 0
@@ -59,10 +63,6 @@ def start():
         random.shuffle(elems)
         for el_num in range(len(elems)):
             create_elem(el_num)
-    elif game_status == 1:  #начать игру заново
-        random.shuffle(elems)
-        for el_num in range(len(elems)):
-            draw_elem(el_num)
     game_status = 0
 
     greeting.pack_forget()
@@ -73,6 +73,7 @@ def start():
     restart.pack(side = LEFT)
 
     tick()
+
     win_window()
 
 root = Tk()
