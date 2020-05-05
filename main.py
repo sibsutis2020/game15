@@ -19,7 +19,12 @@ canv_width = x_count * cell_size
 canv_height = y_count * cell_size
 
 def win_window():
-    w_w = askyesno("", "ВЫ ПОБЕДИЛИ!!!\nХотите начать заново?")
+    w_w = askyesno("", "ВЫ ПОБЕДИЛИ!!!\n" +"Время игры: " + str(temp) + "\nХотите начать заново?")
+
+    if w_w == 0:
+        close()
+    elif w_w == 1:
+        reshuffle()
 
 #перемешивание элементов | рестарт
 def reshuffle():
@@ -68,6 +73,7 @@ def start():
     restart.pack(side = LEFT)
 
     tick()
+    win_window()
 
 root = Tk()
 root.title("Пятнашки")
@@ -182,7 +188,7 @@ greeting.pack()
 start = Button(f_bottom, text = "Start", font = ("Ubuntu", 13), bg = "skyblue", width = 10, command = start)
 start.pack(side = LEFT)
 
-close = Button(f_bottom, text = "Close game", font = ("Ubuntu", 13), bg = "skyblue", command = close)
-close.pack(side = RIGHT)
+exit = Button(f_bottom, text = "Close game", font = ("Ubuntu", 13), bg = "skyblue", command = close)
+exit.pack(side = RIGHT)
 
 root.mainloop()
