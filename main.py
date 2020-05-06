@@ -18,8 +18,9 @@ elems = ["e1", "e2", "e3","e4","e5","e6","e7","e8", "e9","e10","e11", "e12","e13
 canv_width = x_count * cell_size
 canv_height = y_count * cell_size
 
+#вывод диалогового окна при победе
 def win_window():
-    w_w = askyesno("", "ВЫ ПОБЕДИЛИ!!!\n" +"Время игры: " + str(temp) + "\nХотите начать заново?")
+    w_w = askyesno("", "ВЫ ПОБЕДИЛИ!!!\n" +"Время игры: " + str(temp) + " sec" + "\nХотите начать заново?")
 
     if w_w == 0:
         close()
@@ -73,8 +74,6 @@ def start():
     restart.pack(side = LEFT)
 
     tick()
-
-    win_window()
 
 root = Tk()
 root.title("Пятнашки")
@@ -178,6 +177,8 @@ def test_elems(event):
         if elems[tmp_num] == "e0":
             change_elems(el_num, tmp_num)
             game_status = test_win()
+            if game_status:
+                win_window()
     return
 
 #привязка к событиям мыши
