@@ -1,6 +1,7 @@
 from tkinter import *
 import random
 from datetime import datetime
+from tkinter.messagebox import *
 
 #параметры поля
 cell_size = 60
@@ -17,6 +18,14 @@ elems = ["e1", "e2", "e3","e4","e5","e6","e7","e8", "e9","e10","e11", "e12","e13
 canv_width = x_count * cell_size
 canv_height = y_count * cell_size
 
+#вывод диалогового окна при победе
+def win_window():
+    w_w = askyesno("", "ВЫ ПОБЕДИЛИ!!!\n" +"Время игры: " + str(temp) + " sec" + "\nХотите начать заново?")
+
+    if w_w == 0:
+        close()
+    elif w_w == 1:
+        reshuffle()
 
 #перемешивание элементов | рестарт
 def reshuffle():
@@ -25,7 +34,11 @@ def reshuffle():
     random.shuffle(elems)
     for el_num in range(len(elems)):
         draw_elem(el_num)
+    root.after_cancel(after_id)
     temp = 0
+    time.config(text = "00:00")
+
+    tick()
 
 #секундомер
 temp = 0
@@ -36,6 +49,9 @@ def tick():
     f_temp = datetime.fromtimestamp(temp).strftime("%M:%S")
     time.configure(text=str(f_temp))
     temp += 1
+
+    if game_status == 1:
+        root.after_cancel(after_id)
 
 #функция старта игры
 def start():
@@ -48,10 +64,6 @@ def start():
         random.shuffle(elems)
         for el_num in range(len(elems)):
             create_elem(el_num)
-    elif game_status == 1:  #начать игру заново
-        random.shuffle(elems)
-        for el_num in range(len(elems)):
-            draw_elem(el_num)
     game_status = 0
 
     greeting.pack_forget()
@@ -65,6 +77,7 @@ def start():
 
 root = Tk()
 root.title("Пятнашки")
+root.resizable(False, False)
 
 f_top = Frame()
 f_top.pack(fill = X)
@@ -164,6 +177,8 @@ def test_elems(event):
         if elems[tmp_num] == "e0":
             change_elems(el_num, tmp_num)
             game_status = test_win()
+            if game_status:
+                win_window()
     return
 
 #привязка к событиям мыши
@@ -175,7 +190,7 @@ greeting.pack()
 start = Button(f_bottom, text = "Start", font = ("Ubuntu", 13), bg = "skyblue", width = 10, command = start)
 start.pack(side = LEFT)
 
-close = Button(f_bottom, text = "Close game", font = ("Ubuntu", 13), bg = "skyblue", command = close)
-close.pack(side = RIGHT)
+exit = Button(f_bottom, text = "Close game", font = ("Ubuntu", 13), bg = "skyblue", command = close)
+exit.pack(side = RIGHT)
 
 root.mainloop()
