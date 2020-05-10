@@ -127,7 +127,7 @@ def change_elems(el_num1, el_num2):
     draw_elem(el_num2)
 
 #шаги
-temp0 = 0
+temp0 = 1
 def shagi():
     global temp0, step
     f_temp0 = temp0
