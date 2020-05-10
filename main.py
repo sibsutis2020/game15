@@ -20,7 +20,8 @@ canv_height = y_count * cell_size
 
 #вывод диалогового окна при победе
 def win_window():
-    w_w = askyesno("", "ВЫ ПОБЕДИЛИ!!!\n" +"Время игры: " + str(temp)+ " sec\n" + "Кол-во шагов: "+ str(temp0 - 1) + "\nХотите начать заново?")
+    w_w = askyesno("", "ВЫ ПОБЕДИЛИ!!!\n" +"Время игры: " + str(temp)+ " sec\n" + "Кол-во шагов: "+ str(temp0 - 1) +
+    "\nХотите начать заново?")
 
     if w_w == 0:
         close()
@@ -57,8 +58,8 @@ def tick():
 def start():
     global game_status, elems, time, step
 
-    step = Label(root, width=5, font=("Ubuntu", 15), text="0")
-    step.pack()
+    step = Label(f_top, width=5, font=("Ubuntu", 15), text="0")
+    step.pack(side = RIGHT)
 
     time = Label(f_top, width=5, font=("Ubuntu", 15), text="00:00")
     time.pack(side = LEFT)
