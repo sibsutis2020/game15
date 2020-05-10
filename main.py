@@ -65,6 +65,7 @@ def start():
     time.pack(side = LEFT)
 
     if game_status == -1 :  #начать игру в первый раз
+        random.shuffle(elems)
         for el_num in range(len(elems)):
             create_elem(el_num)
     game_status = 0
