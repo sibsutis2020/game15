@@ -39,7 +39,10 @@ def tick():
 
 #функция старта игры
 def start():
-    global game_status, elems, time
+    global game_status, elems, time, step
+
+    step = Label(root, width=5, font=("Ubuntu", 15), text="0")
+    step.pack()
 
     time = Label(root, width=5, font=("Ubuntu", 15), text="00:00")
     time.pack()
@@ -110,6 +113,14 @@ def change_elems(el_num1, el_num2):
     draw_elem(el_num1)
     draw_elem(el_num2)
 
+#шаги
+temp0 = 0
+def shagi():
+    global temp0, step
+    f_temp0 = temp0
+    step.configure(text=str(temp0))
+    temp0 += 1
+
 #проверика на завершение игры
 def test_win( ):
     for el_num in range(15):
@@ -163,6 +174,7 @@ def test_elems(event):
     for tmp_num in near_cells:
         if elems[tmp_num] == "e0":
             change_elems(el_num, tmp_num)
+            shagi()
             game_status = test_win()
     return
 
