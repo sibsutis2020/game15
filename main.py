@@ -29,15 +29,19 @@ def win_window():
 
 #перемешивание элементов | рестарт
 def reshuffle():
-    global elems, game_status, temp
+    global elems, game_status, temp, temp0
     game_status = 0
     random.shuffle(elems)
     for el_num in range(len(elems)):
         draw_elem(el_num)
     root.after_cancel(after_id)
+    
+    temp0 = 0
+    step.configure(text=str(temp0))
     temp = 0
     time.config(text = "00:00")
 
+    shagi()
     tick()
 
 #секундомер
@@ -56,7 +60,7 @@ def tick():
 #функция старта игры
 def start():
     global game_status, elems, time, step
-
+    random.shuffle(elems)
     step = Label(root, width=5, font=("Ubuntu", 15), text="0")
     step.pack()
 
@@ -129,7 +133,6 @@ def change_elems(el_num1, el_num2):
 temp0 = 1
 def shagi():
     global temp0, step
-    f_temp0 = temp0
     step.configure(text=str(temp0))
     temp0 += 1
 
