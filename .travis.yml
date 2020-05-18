@@ -1,4 +1,5 @@
 language: python
-rvm:
-  - 3.0
-  - python
+
+branches:
+  only:
+    - moduls
