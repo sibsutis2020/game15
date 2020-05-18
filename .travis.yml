@@ -1,1 +1,4 @@
 language: python
+rvm:
+  - 3.0
+  - python
