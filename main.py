@@ -2,21 +2,7 @@ from tkinter import *
 import random
 from datetime import datetime
 from tkinter.messagebox import *
-
-#параметры поля
-cell_size = 60
-x_count = 4
-y_count = 4
-
-#статус игры
-game_status = -1
-
-#массив игровых элементов
-elems = ["e1", "e2", "e3","e4","e5","e6","e7","e8", "e9","e10","e11", "e12","e13","e14","e15","e0"]
-
-#формирование канавы
-canv_width = x_count * cell_size
-canv_height = y_count * cell_size
+from variables import *
 
 #вывод диалогового окна при победе
 def win_window():
@@ -36,7 +22,7 @@ def reshuffle():
     for el_num in range(len(elems)):
         draw_elem(el_num)
     root.after_cancel(after_id)
-    
+
     temp0 = 0
     step.configure(text=str(temp0))
     temp = 0
@@ -46,8 +32,6 @@ def reshuffle():
     tick()
 
 #секундомер
-temp = 0
-after_id = ''
 def tick():
     global temp, after_id
     after_id = root.after(1000, tick)
@@ -132,7 +116,6 @@ def change_elems(el_num1, el_num2):
     draw_elem(el_num2)
 
 #шаги
-temp0 = 1
 def shagi():
     global temp0, step
     step.configure(text=str(temp0))
