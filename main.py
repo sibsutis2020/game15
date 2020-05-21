@@ -2,21 +2,9 @@ from tkinter import *
 import random
 from datetime import datetime
 from tkinter.messagebox import *
-
-#параметры поля
-cell_size = 60
-x_count = 4
-y_count = 4
-
-#статус игры
-game_status = -1
-
-#массив игровых элементов
-elems = ["e1", "e2", "e3","e4","e5","e6","e7","e8", "e9","e10","e11", "e12","e13","e14","e15","e0"]
-
-#формирование канавы
-canv_width = x_count * cell_size
-canv_height = y_count * cell_size
+from variables import *
+from neighbor_cell_m import *
+from visual_m import *
 
 #вывод диалогового окна при победе
 def win_window():
@@ -36,7 +24,7 @@ def reshuffle():
     for el_num in range(len(elems)):
         draw_elem(el_num)
     root.after_cancel(after_id)
-    
+
     temp0 = 0
     step.configure(text=str(temp0))
     temp = 0
@@ -46,8 +34,6 @@ def reshuffle():
     tick()
 
 #секундомер
-temp = 0
-after_id = ''
 def tick():
     global temp, after_id
     after_id = root.after(1000, tick)
@@ -83,48 +69,6 @@ def start():
 
     tick()
 
-root = Tk()
-root.title("Пятнашки")
-root.resizable(False, False)
-
-f_top = Frame()
-f_top.pack(fill = X)
-
-canv = Canvas(root, width = canv_width, height = canv_height)
-canv.pack()
-
-f_bottom = Frame()
-f_bottom.pack(side = BOTTOM, fill = X)
-
-#создание элементов
-def create_elem(el_num):
-    el = elems[el_num]
-    row_num = el_num // 4
-    col_num = el_num % 4
-    x_left = col_num * cell_size
-    y_top = row_num * cell_size
-    canv.create_rectangle(x_left + 1, y_top + 1, x_left + cell_size - 2,
-                          y_top + cell_size - 2, fill = "skyblue", outline = "#050",
-                          width = 2, tag = el)
-    canv.create_text(x_left + 30, y_top + 30, text = el[1:], font = ("Arial", 20), tag = "t" + el)
-
-#отрисовка элементов
-def draw_elem(el_num):
-    el = elems[el_num]
-    row_num = el_num // 4
-    col_num = el_num % 4
-    x_left = col_num * cell_size
-    y_top = row_num * cell_size
-    canv.coords(el, x_left + 1, y_top + 1 , x_left + cell_size - 2,
-                y_top + cell_size - 2)
-    canv.coords("t" + el, x_left + 30, y_top + 30 )
-
-#прорисовка клеток
-for x_num in range(x_count):
-    for y_num in range(y_count):
-        canv.create_line(0, y_num * cell_size, canv_width, y_num * cell_size)
-        canv.create_line( x_num * cell_size, 0, x_num * cell_size, canv_height)
-
 #поменять местами 2 элемента
 def change_elems(el_num1, el_num2):
     elems[el_num1], elems[el_num2] = elems[el_num2], elems[el_num1]
@@ -132,7 +76,6 @@ def change_elems(el_num1, el_num2):
     draw_elem(el_num2)
 
 #шаги
-temp0 = 1
 def shagi():
     global temp0, step
     step.configure(text=str(temp0))
@@ -145,26 +88,6 @@ def test_win( ):
         if el_num + 1 != int(el[1:]):
             return 0
     return 1
-
-#получение списка соседних ячеек
-def neighbor_cell(el_num):
-    near_cells = []
-    row_num = el_num // 4
-    col_num = el_num % 4
-
-    if col_num > 0:
-        tmp_num = col_num + row_num * 4 - 1
-        near_cells.append(tmp_num)
-    if col_num < 3:
-        tmp_num = col_num + row_num * 4 + 1
-        near_cells.append(tmp_num)
-    if row_num > 0:
-        tmp_num = col_num + (row_num -1) * 4
-        near_cells.append(tmp_num)
-    if row_num < 3:
-        tmp_num = col_num + (row_num + 1) * 4
-        near_cells.append(tmp_num)
-    return near_cells
 
 def close():
     root.destroy()
