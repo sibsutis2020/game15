@@ -1,7 +1,7 @@
 import unittest
 from neighbor_cell_m import neighbor_cell
 
-class TestNeighborCell(unittest.TestCase):
+class NeighborCellTest(unittest.TestCase):
 
     def test_neighbor_cell(self):
         result = neighbor_cell(2)
