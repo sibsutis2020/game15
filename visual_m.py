@@ -15,27 +15,29 @@ f_bottom = Frame()
 f_bottom.pack(side = BOTTOM, fill = X)
 
 #создание элементов
-def create_elem(el_num):
-    el = elems[el_num]
-    row_num = el_num // 4
-    col_num = el_num % 4
+def create_elem( elem_num):
+    el = elems[elem_num]
+    row_num = elem_num // 4
+    col_num = elem_num % 4
+    color_num = int(el[1:])
+    elem_color = colors[color_num]
     x_left = col_num * cell_size
     y_top = row_num * cell_size
-    canv.create_rectangle(x_left + 1, y_top + 1, x_left + cell_size - 2,
-                          y_top + cell_size - 2, fill = "skyblue", outline = "#050",
-                          width = 2, tag = el)
-    canv.create_text(x_left + 30, y_top + 30, text = el[1:], font = ("Arial", 20), tag = "t" + el)
+    canv.create_rectangle(x_left + 1, y_top + 1, x_left + cell_size - 2, y_top + cell_size - 2,
+            fill = elem_color, outline="#050", width = 2, tag = el)
+    canv.create_text(x_left + 30, y_top + 30, text = el[1:], font = ("Arial", 20), tag = "t"+el)
 
 #отрисовка элементов
-def draw_elem(el_num):
-    el = elems[el_num]
-    row_num = el_num // 4
-    col_num = el_num % 4
+def draw_elem( elem_num):
+    el = elems[elem_num]
+    row_num = elem_num // 4
+    col_num = elem_num % 4
+    color_num = int(el[1:])
+    elem_color = colors[color_num]
     x_left = col_num * cell_size
     y_top = row_num * cell_size
-    canv.coords(el, x_left + 1, y_top + 1 , x_left + cell_size - 2,
-                y_top + cell_size - 2)
-    canv.coords("t" + el, x_left + 30, y_top + 30 )
+    canv.coords(el, x_left + 1, y_top + 1 , x_left + cell_size - 2, y_top + cell_size - 2 )
+    canv.coords("t"+el, x_left + 30, y_top + 30 )
 
 #прорисовка клеток
 for x_num in range(x_count):
