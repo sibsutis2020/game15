@@ -2,5 +2,4 @@ language: python
 python: 3.8
 
 script:
-  - python main.py
-  - python test_neighbor_cell.py 
+  - python3 test_neighbor_cell.py
